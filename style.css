@@ -1,3 +1,48 @@
+/* Fullscreen intro */
+#enter-screen {
+  position: fixed;
+  inset: 0;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 1.2s ease;
+}
+
+/* Main content hidden at start */
+#main-content {
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+/* Fade helpers */
+.hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Style the enter button */
+#enter-btn {
+  padding: 20px 40px;
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  font-family: 'Press Start 2P', monospace;
+}
+
+#enter-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
 video {
     margin: 0;
     padding: 0;

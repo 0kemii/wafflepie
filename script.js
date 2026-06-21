@@ -1,3 +1,46 @@
+const enterScreen = document.getElementById("enter-screen");
+const enterBtn = document.getElementById("enter-btn");
+const mainContent = document.getElementById("main-content");
+const music = document.getElementById("bg-music");
+
+enterBtn.addEventListener("click", async () => {
+  try {
+    if (!music) {
+      console.error("Audio element not found!");
+      enterScreen.classList.add("hidden");
+      mainContent.style.opacity = "1";
+      setTimeout(() => enterScreen.remove(), 1500);
+      return;
+    }
+
+    music.volume = 0;
+    await music.play();
+
+    let vol = 0;
+    const fadeAudio = setInterval(() => {
+      if (vol < 1) {
+        vol += 0.05;
+        music.volume = vol;
+      } else {
+        clearInterval(fadeAudio);
+      }
+    }, 80);
+
+    enterScreen.classList.add("hidden");
+    mainContent.style.opacity = "1";
+
+    setTimeout(() => {
+      enterScreen.remove();
+    }, 1500);
+
+  } catch (err) {
+    console.log("Audio blocked:", err);
+    enterScreen.classList.add("hidden");
+    mainContent.style.opacity = "1";
+    setTimeout(() => enterScreen.remove(), 1500);
+  }
+});
+
 // Language switching functionality
 let currentLang = 0; // 0: Chinese, 1: Japanese, 2: Korean
 
@@ -48,8 +91,6 @@ function playMusic() {
     audio.volume = 0.4;
     audio.play();
 }
-
-playMusic();
 
 function updateTime() {
     const now = new Date();
